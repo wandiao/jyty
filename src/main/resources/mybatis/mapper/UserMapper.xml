@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper">
+
+	<resultMap type="User" id="userMap">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="name" property="name"/>	
+		<result column="email" property="email"/>
+		<result column="qq" property="qq"/>	
+		<result column="weixin" property="weixin"/>	
+		<result column="blog" property="blog"/>	
+		<result column="github" property="github"/>	
+		<result column="summary" property="summary"/>	
+		<result column="create_time" property="create_time"/>	
+		<result column="update_time" property="update_time"/>
+	</resultMap>
+	
+	
+	<!--表名 -->
+	<sql id="tableName">
+		jyty_user
+	</sql>
+	
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		id,
+		username,
+		password,
+		name,
+		qq,
+		weixin,
+		blog,
+		github,
+		summary,
+		email,
+		create_time,
+		update_time
+	</sql>
+	
+	<!-- 判断用户名和密码 -->
+	<select id="getUserInfo" parameterType="User"  resultMap="userMap">
+		select <include refid="Field"></include> from
+		<include refid="tableName"></include>
+		where 1=1
+		<if test="username!=null and password!=null">
+		and username = #{username} and password = md5(#{password})
+		</if>
+	</select>
+	
+	<!-- 检查用户是否存在 -->
+	<select id="userIsExist" parameterType="String" resultType="int">
+		select count(*) as count  from
+		<include refid="tableName"></include>
+		where username=#{_parameter}
+	</select>
+	
+	<!-- 更新登录时间 -->
+	<update id="updateLastLogin" parameterType="ReqData">
+		update <include refid="tableName"></include>
+		set
+		last_login=#{last_login},
+		last_ip=#{last_ip}
+		where user_id = #{user_id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjectMapper">
+
+	<resultMap type="Project" id="projectMap">
+		<id column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="read_num" property="read_num"/>
+		<result column="type_id" property="type_id"/>	
+		<result column="url" property="url"/>	
+		<result column="summary" property="summary"/>
+		<result column="company" property="company"/>
+		<result column="favorite_num" property="favorite_num"/>	
+		<result column="position" property="position"/>	
+		<result column="create_time" property="create_time"/>	
+		<result column="update_time" property="update_time"/>
+		<result column="project_start_time" property="project_start_time"/>
+		<result column="project_end_time" property="project_end_time"/>
+		<association property="type_name" column="type_id"  select="getTypeName">
+		</association>			
+	</resultMap>
+	
+	
+	<!-- 表名 -->
+	<sql id="projectTable">
+		jyty_project
+	</sql>
+	<sql id="projectTypeTable">
+		jyty_project_type
+	</sql>
+	<!-- 字段 -->
+	<sql id="projectField">
+		id,
+		title,
+		read_num,
+		type_id,
+		url,
+		summary,
+		company,
+		favorite_num
+		position,
+		create_time,
+		update_time,
+		project_start_time,
+		project_end_time
+	</sql>
+	<!-- 字段值 -->
+	<sql id="projectFieldValue">
+		#{id},
+		#{title},
+		0,
+		#{type_id},
+		#{url},
+		#{summary},
+		#{company},
+		0,
+		#{position},
+		#{create_time},
+		#{update_time},
+		#{project_start_time},
+		#{project_end_time}
+	</sql>
+	
+	<!-- 得到一条项目详情 -->
+	<select id="getProjectItem" parameterType="int"  resultMap="projectMap">
+		select
+		 <include refid="projectField"></include>
+		 from  
+		<include refid="projectTable"></include>
+		where 1=1
+		and id = #{_parameter}
+	</select>
+	
+	<!-- 得到分类名称 -->
+	<select id="getTypeName" parameterType="String" resultType="String">
+		select type_name  from
+		<include refid="projectTypeTable"></include>
+		where 1=1
+		<if test="_parameter!=null">
+		and type_id = #{_parameter}
+		</if>
+	</select>
+	
+	<insert id="addProject" parameterType="ReqData">
+		insert into <include refid="projectTable"></include>
+		(
+		<include refid="projectField"></include>
+		) values (
+		<include refid="projectFieldValue"></include>
+		)
+	</insert>
+	
+	
+</mapper>
