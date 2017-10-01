@@ -9,7 +9,6 @@
 	<%@ include file="include/head.jsp"%>
 </head>
 <body>
-
 	<div id="article">
 		<%@ include file="include/sidebar.jsp"%>
 		<!--右侧修改内容-->
@@ -22,6 +21,12 @@
 			</div>
 			<div class="rightc">
 				<form action="<%=path %>/project/add.do" method="post" class="biaodan">
+					<c:if test="${error_msg != null}">
+						<h3>${error_msg }</h3>
+					</c:if>
+					<c:if test="${msg != null}">
+						<h3>${msg }</h3>
+					</c:if>
 					<ul>
 						<li class="replace">
 							<p class="replacename">项目名称：</p>
@@ -30,9 +35,9 @@
 						<li class="replace">
 							<p class="replacename">分类：</p>
 							<select style="margin-left:50px;" name="type_id">
-								<option>app1</option>
-								<option>app2</option>
-								<option>app3</option>
+								<c:forEach items="${types }" var="type">
+									<option value="${type.type_id }">${type.type_name}</option>
+								</c:forEach>
 							</select>
 						</li>
 						<li class="replace">
@@ -41,11 +46,11 @@
 						</li>
 						<li class="replace">
 							<p class="replacename">项目开始时间：</p>
-							<input type="num" class="replacecontent" name="project_start_time">
+							<input type="date" class="replacecontent" name="project_start_time">
 						</li>
 						<li class="replace">
 							<p class="replacename">项目结束时间：</p>
-							<input type="num" class="replacecontent" name="project_end_time">
+							<input type="date" class="replacecontent" name="project_end_time">
 						</li>
 						<li class="replace">
 							<p class="replacename">项目简介：</p>

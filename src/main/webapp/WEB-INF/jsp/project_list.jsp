@@ -32,32 +32,16 @@
 							<div class="replace_listtop1">项目时间</div>
 							<div class="replace_listtop1">操作</div>
 						</li>
-
-						<li class="replace_listcontent">
-							<div class="replace_listcontent1">app</div>
-							<div class="replace_listcontent1">app</div>
-							<div class="replace_listcontent1">项目简介</div>
-							<div class="replace_listcontent1">项目负责</div>
-							<div class="replace_listcontent1">项目时间</div>
-							<div class="replace_listcontent1">修改</div>
-						</li>
-						<li class="replace_listcontent">
-							<div class="replace_listcontent1">app</div>
-							<div class="replace_listcontent1">app</div>
-							<div class="replace_listcontent1">项目简介</div>
-							<div class="replace_listcontent1">项目负责</div>
-							<div class="replace_listcontent1">项目时间</div>
-							<div class="replace_listcontent1">修改</div>
-						</li>
-						<li class="replace_listcontent">
-							<div class="replace_listcontent1">app</div>
-							<div class="replace_listcontent1">app</div>
-							<div class="replace_listcontent1">项目简介</div>
-							<div class="replace_listcontent1">项目负责</div>
-							<div class="replace_listcontent1">项目时间</div>
-							<div class="replace_listcontent1">修改</div>
-						</li>
-						
+						<c:forEach items="${projects }" var="item">
+							<li class="replace_listcontent">
+								<div class="replace_listcontent1">${item.title }</div>
+								<div class="replace_listcontent1">${item.type_name }</div>
+								<div class="replace_listcontent1">${item.summary }</div>
+								<div class="replace_listcontent1">${item.position }</div>
+								<div class="replace_listcontent1">${item.project_start_time }</div>
+								<div class="replace_listcontent1">${item.project_end_time }</div>
+							</li>
+						</c:forEach>
 					</ul>
 				</form>
 			</div>

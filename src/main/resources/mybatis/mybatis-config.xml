@@ -12,6 +12,7 @@
 	<typeAliases>
 		<typeAlias type="com.jyty.entity.Project" alias="Project"/>
 		<typeAlias type="com.jyty.entity.User" alias="User"/>
+		<typeAlias type="com.jyty.entity.BaseType" alias="Type"/> 
 		
 		
 		<!-- <typeAlias type="com.tianxiadayu.entity.User" alias="User"/>

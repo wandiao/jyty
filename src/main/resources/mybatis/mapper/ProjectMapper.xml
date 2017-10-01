@@ -38,7 +38,7 @@
 		url,
 		summary,
 		company,
-		favorite_num
+		favorite_num,
 		position,
 		create_time,
 		update_time,
@@ -82,6 +82,23 @@
 		</if>
 	</select>
 	
+	<!-- 获取项目列表 -->
+	<select id="getProjectList" parameterType="ReqData" resultMap="projectMap">
+		select <include refid="projectField"></include> from
+		<include refid="projectTable"></include>
+		where 1=1 
+		<if test="type_id!=null">
+		and type_id = #{type_id}
+		</if>
+		order by create_time desc
+		
+	</select>
+	<!-- 获取所有分类 -->
+	<select id="getTypes" resultType="Type">
+		select * from <include refid="projectTypeTable"></include>
+	</select>
+	
+	<!-- 新增项目 -->
 	<insert id="addProject" parameterType="ReqData">
 		insert into <include refid="projectTable"></include>
 		(
@@ -90,6 +107,12 @@
 		<include refid="projectFieldValue"></include>
 		)
 	</insert>
+	
+	<!-- 增加阅读数 -->
+	<update id="addReadNum" parameterType="int">
+		update <include refid="projectTable"></include>
+		set read_num = read_num+1
+	</update>
 	
 	
 </mapper>
