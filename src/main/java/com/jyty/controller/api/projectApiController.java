@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jyty.service.ProjectService;
+import com.jyty.entity.BaseType;
 import com.jyty.entity.PageData;
 import com.jyty.util.ReqData;
 import com.github.pagehelper.PageHelper;
@@ -23,7 +24,7 @@ import com.jyty.entity.ResponseData;
 
 @CrossOrigin(origins = "*", maxAge = 3600,methods={RequestMethod.GET,RequestMethod.POST,RequestMethod.OPTIONS})
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/project")
 public class projectApiController {
 	private  Logger logger = Logger.getLogger(this.getClass());
 	@Resource(name="projectService")
@@ -35,7 +36,7 @@ public class projectApiController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/project/{id}")
+	@RequestMapping(value="/{id}")
 	@ResponseBody
 	public ResponseData getArticleDetail(@PathVariable("id") String id) throws Exception {
 		ResponseData responseData = new ResponseData();
@@ -57,7 +58,7 @@ public class projectApiController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/project/list")
+	@RequestMapping(value="/list")
 	@ResponseBody
 	public ResponseData getArticleList(HttpServletRequest request) throws Exception {
 		ResponseData responseData = new ResponseData();
@@ -82,6 +83,15 @@ public class projectApiController {
 		pd.setTotalPage(page.getPages());
 		
 		responseData = responseData.success(pd);
+		return responseData;
+	}
+	
+	@RequestMapping(value="/types")
+	@ResponseBody
+	 public ResponseData getTypes() throws Exception {
+		ResponseData responseData = new ResponseData();
+		List<BaseType> types = projectService.getTypes();
+		responseData.success(types);
 		return responseData;
 	}
 }
