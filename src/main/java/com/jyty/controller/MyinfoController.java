@@ -13,4 +13,10 @@ public class MyinfoController {
 		mv.setViewName("personinfo");
 		return mv;
 	}
+	@RequestMapping(value="/")
+	public ModelAndView revise_info() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("inforevise");
+		return mv;
+	}
 }
