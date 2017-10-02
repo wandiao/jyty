@@ -6,16 +6,16 @@
 			<div class="lefttop">资料管理</div>
 			<ul>
 				
-					<li class="left1"><a href="<%=path %>/project/list">项目管理</a></li>
+					<li class="left1"><a href="<%=request.getContextPath() %>/project/list">项目管理</a></li>
 				
 				
-					<li class="left1"><a href="<%=path %>/image/list">图片管理</a></li>
+					<li class="left1"><a href="<%=request.getContextPath() %>/image/list">图片管理</a></li>
 				
 				
-					<li class="left1"><a href="<%=path %>/article/list">文章管理</a></li>
+					<li class="left1"><a href="<%=request.getContextPath() %>/article/list">文章管理</a></li>
 				
 				
-					<li class="left1"><a href="<%=path %>/myinfo/personinfo">信息管理</a></li>
+					<li class="left1"><a href="<%=request.getContextPath() %>/myinfo/detail">信息管理</a></li>
 				
 			</ul>
 		</div>
