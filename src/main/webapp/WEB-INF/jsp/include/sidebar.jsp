@@ -5,17 +5,33 @@
 		<div class="left">
 			<div class="lefttop">资料管理</div>
 			<ul>
-				<a href="">
-					<li class="left1 check1">项目管理</li>
-				</a>
-				<a href="">
-					<li class="left1">图片管理</li>
-				</a>
-				<a href="">
-					<li class="left1">文章管理</li>
-				</a>
-				<a href="">
-					<li class="left1">信息管理</li>
-				</a>
+				
+					<li class="left1"><a href="<%=path %>/project/list">项目管理</a></li>
+				
+				
+					<li class="left1"><a href="<%=path %>/image/list">图片管理</a></li>
+				
+				
+					<li class="left1"><a href="<%=path %>/article/list">文章管理</a></li>
+				
+				
+					<li class="left1"><a href="<%=path %>/myinfo/personinfo">信息管理</a></li>
+				
 			</ul>
 		</div>
+	<script>
+		var href=location.href;
+		var left = $('.left1');
+		if(href.indexOf('project') !== -1) {
+			left.eq(0).addClass('check1')
+		}
+		if(href.indexOf('image') !== -1) {
+			left.eq(1).addClass('check1')
+		}
+		if(href.indexOf('article') !== -1) {
+			left.eq(2).addClass('check1')
+		}
+		if(href.indexOf('myinfo') !== -1) {
+			left.eq(3).addClass('check1')
+		}
+	</script>

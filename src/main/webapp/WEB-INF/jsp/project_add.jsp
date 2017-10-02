@@ -16,7 +16,8 @@
 			<div class="righttop">
 				<ul>
 					<li class="righttitle"><a href="<%=path %>/project/list">项目列表</a></li>
-					<li class="righttitle check2"><a href="<%=path %>/project/add">添加项目</a></li>
+					<li class="righttitle  check2"><a href="<%=path %>/project/add">添加项目</a></li>
+					<li class="righttitle"><a href="<%=path %>/project/type">项目分类</a></li>
 				</ul>
 			</div>
 			<div class="rightc">

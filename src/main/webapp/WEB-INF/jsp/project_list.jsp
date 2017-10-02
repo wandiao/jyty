@@ -10,15 +10,15 @@
 	<%@ include file="include/head.jsp"%>
 </head>
 <body>
-
 	<div id="article">
 		<%@ include file="include/sidebar.jsp"%>
 		<!--右侧修改内容-->
 		<div class="right">
 			<div class="righttop">
 				<ul>
-					<li class="righttitle check2"><a href="<%=path %>/project/list">项目列表</a></li>
+					<li class="righttitle  check2"><a href="<%=path %>/project/list">项目列表</a></li>
 					<li class="righttitle"><a href="<%=path %>/project/add">添加项目</a></li>
+					<li class="righttitle"><a href="<%=path %>/project/type">项目分类</a></li>
 				</ul>
 			</div>
 			<div class="rightc">
@@ -44,6 +44,16 @@
 						</c:forEach>
 					</ul>
 				</form>
+				<!--<div class="now"></div>-->
+				<div class="M-box"></div>
+				<script>
+				$('.M-box').pagination({
+					pageCount:"${total}",
+					current:"${current}",
+					showData:"${pageSize}"
+				});
+				</script>
+				
 			</div>
 		</div>
 	</div>

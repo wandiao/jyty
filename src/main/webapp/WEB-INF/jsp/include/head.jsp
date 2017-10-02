@@ -8,4 +8,8 @@
 			+ path + "/";
 %>
 <link rel="stylesheet" type="text/css" href="<%=path %>/static/css/public.css">
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=path %>/static/css/pagination.css">
+<script src="<%=path %>/static/js/jquery.min.js"></script>
+<script src="<%=path %>/static/js/jquery.pagination.js"></script>
+<script src="<%=path %>/static/js/ueditor.config.js"></script>
+<script src="<%=path %>/static/js/ueditor.all.min.js"></script>

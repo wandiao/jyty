@@ -1,39 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>个人后台文章管理</title>
-	<link rel="stylesheet" type="text/css" href="css/public.css">
+	<%@ include file="include/head.jsp"%>
 </head>
 <body>
-
 	<div id="article">
-		<!--顶部-->
-		<div class="headtop"><p>任志量的后台管理系统</p><img src="" alt=""></div>
-		<!--左侧菜单-->
-		<div class="left">
-			<div class="lefttop">资料管理</div>
-			<ul>
-				<a href="">
-					<li class="left1 ">项目管理</li>
-				</a>
-				<a href="">
-					<li class="left1">图片管理</li>
-				</a>
-				<a href="">
-					<li class="left1 check1">文章管理</li>
-				</a>
-				<a href="">
-					<li class="left1">信息管理</li>
-				</a>
-			</ul>
-		</div>
+		<%@ include file="include/sidebar.jsp"%>
 		<!--右侧修改内容-->
 		<div class="right">
 			<div class="righttop">
 				<ul>
-					<li class="righttitle">文章列表</li>
-					<li class="righttitle check2">添加文章</li>
+					<li class="righttitle check2"><a href="<%=path %>/article/list">文章列表</a></li>
+					<li class="righttitle"><a href="<%=path %>/article/add">添加文章</a></li>
+					<li class="righttitle"><a href="<%=path %>/article/type">文章类别</a></li>
 				</ul>
 			</div>
 			<div class="rightc">
@@ -57,6 +41,7 @@
 					</ul>
 					
 				</form>
+				
 			</div>
 		</div>
 	</div>

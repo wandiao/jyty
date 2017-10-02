@@ -110,4 +110,12 @@ public class ProjectController {
 		return mv;
 	}
 
+
+	@RequestMapping(value="/type")
+	public ModelAndView typeproject() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("project_type");
+		return mv;
+	}
+
 }
