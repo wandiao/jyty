@@ -13,7 +13,7 @@ public class MyinfoController {
 		mv.setViewName("personinfo");
 		return mv;
 	}
-	@RequestMapping(value="/")
+	@RequestMapping(value="/revise")
 	public ModelAndView revise_info() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("inforevise");

@@ -14,8 +14,8 @@
 <div class="right">
 			<div class="righttop">
 				<ul>
-					<li class="righttitle">个人信息</li>
-					<li class="righttitle check2">信息管理</li>
+					<li class="righttitle"><a href="<%=path %>/myinfo/detail">个人信息</a></li>
+					<li class="righttitle check2"><a href="<%=path %>/myinfo/revise">信息管理</a></li>
 				</ul>
 			</div>
 			<div class="rightc">

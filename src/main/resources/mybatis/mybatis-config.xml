@@ -12,13 +12,9 @@
 	<typeAliases>
 		<typeAlias type="com.jyty.entity.Project" alias="Project"/>
 		<typeAlias type="com.jyty.entity.User" alias="User"/>
-		<typeAlias type="com.jyty.entity.BaseType" alias="Type"/> 
+		<typeAlias type="com.jyty.entity.BaseType" alias="Type"/>
+		<typeAlias type="com.jyty.entity.Image" alias="Image"/> 
 		
-		
-		<!-- <typeAlias type="com.tianxiadayu.entity.User" alias="User"/>
-		<typeAlias type="com.tianxiadayu.entity.Article" alias="Article"/>
-		<typeAlias type="com.tianxiadayu.entity.Tag" alias="Tag"/>
-		<typeAlias type="com.tianxiadayu.entity.Type" alias="Type"/> -->
 		
 		
 		<!-- 这里添加生成的实体类 -->

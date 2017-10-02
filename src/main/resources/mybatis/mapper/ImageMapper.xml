@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ImageMapper">
+
+	<resultMap type="Image" id="ImageMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="type_id" property="type_id"/>	
+		<result column="pic_url" property="pic_url"/>	
+		<result column="project_name" property="project_name"/>
+		<result column="project_url" property="project_url"/>
+		<result column="summary" property="summary"/>	
+		<result column="read_num" property="read_num"/>	
+		<result column="favorite_num" property="favortie_num"/>	
+		<result column="complete_time" property="update_time"/>
+		<result column="create_time" property="create_time"/>
+		<result column="update_time" property="update_time"/>
+		<association property="type_name" column="type_id"  select="getTypeName">
+		</association>			
+	</resultMap>
+	
+	
+	<!-- 表名 -->
+	<sql id="tableName">
+		jyty_image
+	</sql>
+	<sql id="typeTableName">
+		jyty_image_type
+	</sql>
+	<!-- 字段 -->
+	<sql id="field">
+		id,
+		name,
+		type_id,
+		pic_url,
+		project_name,
+		project_url,
+		summary,
+		read_num,
+		favorite_num,
+		complete_time,
+		create_time,
+		update_time
+	</sql>
+	<!-- 字段值 -->
+	<sql id="fieldValue">
+		#{id},
+		#{name},
+		#{type_id},
+		#{pic_url},
+		#{project_name},
+		#{project_url},
+		#{summary},
+		0,
+		0,
+		#{complete_time},
+		#{create_time},
+		#{update_time}
+	</sql>
+	
+	<!-- 新增图片 -->
+	<insert id="addImage" parameterType="ReqData">
+		insert into <include refid="tableName"></include>
+		(
+		<include refid="field"></include>
+		) values (
+		<include refid="fieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 得到分类名称 -->
+	<select id="getTypeName" parameterType="String" resultType="String">
+		select type_name  from
+		<include refid="typeTableName"></include>
+		where 1=1
+		<if test="_parameter!=null">
+		and type_id = #{_parameter}
+		</if>
+	</select>
+	
+	
+	
+</mapper>

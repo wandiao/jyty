@@ -23,14 +23,14 @@
 	
 	
 	<!-- 表名 -->
-	<sql id="projectTable">
+	<sql id="tableName">
 		jyty_project
 	</sql>
-	<sql id="projectTypeTable">
+	<sql id="typeTableName">
 		jyty_project_type
 	</sql>
 	<!-- 字段 -->
-	<sql id="projectField">
+	<sql id="field">
 		id,
 		title,
 		read_num,
@@ -46,7 +46,7 @@
 		project_end_time
 	</sql>
 	<!-- 字段值 -->
-	<sql id="projectFieldValue">
+	<sql id="fieldValue">
 		#{id},
 		#{title},
 		0,
@@ -65,9 +65,9 @@
 	<!-- 得到一条项目详情 -->
 	<select id="getProjectItem" parameterType="int"  resultMap="projectMap">
 		select
-		 <include refid="projectField"></include>
+		 <include refid="field"></include>
 		 from  
-		<include refid="projectTable"></include>
+		<include refid="tableName"></include>
 		where 1=1
 		and id = #{_parameter}
 	</select>
@@ -75,7 +75,7 @@
 	<!-- 得到分类名称 -->
 	<select id="getTypeName" parameterType="String" resultType="String">
 		select type_name  from
-		<include refid="projectTypeTable"></include>
+		<include refid="typeTableName"></include>
 		where 1=1
 		<if test="_parameter!=null">
 		and type_id = #{_parameter}
@@ -84,8 +84,8 @@
 	
 	<!-- 获取项目列表 -->
 	<select id="getProjectList" parameterType="ReqData" resultMap="projectMap">
-		select <include refid="projectField"></include> from
-		<include refid="projectTable"></include>
+		select <include refid="field"></include> from
+		<include refid="tableName"></include>
 		where 1=1 
 		<if test="type_id!=null">
 		and type_id = #{type_id}
@@ -95,22 +95,22 @@
 	</select>
 	<!-- 获取所有分类 -->
 	<select id="getTypes" resultType="Type">
-		select * from <include refid="projectTypeTable"></include>
+		select * from <include refid="typeTableName"></include>
 	</select>
 	
 	<!-- 新增项目 -->
 	<insert id="addProject" parameterType="ReqData">
-		insert into <include refid="projectTable"></include>
+		insert into <include refid="tableName"></include>
 		(
-		<include refid="projectField"></include>
+		<include refid="field"></include>
 		) values (
-		<include refid="projectFieldValue"></include>
+		<include refid="fieldValue"></include>
 		)
 	</insert>
 	
 	<!-- 增加阅读数 -->
 	<update id="addReadNum" parameterType="int">
-		update <include refid="projectTable"></include>
+		update <include refid="tableName"></include>
 		set read_num = read_num+1
 	</update>
 	

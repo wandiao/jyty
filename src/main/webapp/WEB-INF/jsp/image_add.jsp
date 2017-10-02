@@ -20,7 +20,7 @@
 				</ul>
 			</div>
 			<div class="rightc">
-				<form action="" class="biaodan">
+				<form action="<%=path %>/image/add.do" method="POST" enctype="multipart/form-data" class="biaodan">
 					<ul>
 						<li class="replace">
 							<p class="replacename">图片名称：</p>
@@ -35,7 +35,7 @@
 						</li>
 						<li class="replace" style="overflow: visible;">
 							<p class="replacename">图片上传：</p>
-							<input type="file" class="replacecontent2" style="text-indent: 0">
+							<input type="file" name="file" class="replacecontent2" style="text-indent: 0">
 						</li>
 					</ul>
 					<input type="submit" value="上传图片" class="addprogress btn">
