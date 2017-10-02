@@ -10,8 +10,10 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
+import org.apache.log4j.Logger;
 
 public class FtpUtil {
+	private  Logger logger = Logger.getLogger(this.getClass());
 	/**  
      * Description: 向FTP服务器上传文件  
      * @param host FTP服务器hostname  
@@ -38,8 +40,10 @@ public class FtpUtil {
                 ftp.disconnect();  
                 return result;  
             }  
-            //切换到上传目录  
+            //切换到上传目录 
+            System.out.println(basePath+filePath);
             if (!ftp.changeWorkingDirectory(basePath+filePath)) {  
+            	ftp.makeDirectory(basePath);
                 //如果目录不存在创建目录  
                 String[] dirs = filePath.split("/");  
                 String tempPath = basePath;  
@@ -47,6 +51,7 @@ public class FtpUtil {
                     if (null == dir || "".equals(dir)) continue;  
                     tempPath += "/" + dir;  
                     if (!ftp.changeWorkingDirectory(tempPath)) {  
+                    	 System.out.println(tempPath);
                         if (!ftp.makeDirectory(tempPath)) {  
                             return result;  
                         } else {  
