@@ -25,7 +25,7 @@ public class UserService {
 		User user = new User();
 		user.setUsername(username);
 		user.setPassword(password);
-		return(User) dao.findForObject("UserMapper.getUserInfo", user);
+		return(User) dao.findForObject("UserMapper.getUserInfo1", user);
 	}
 	
 	/**
@@ -41,5 +41,13 @@ public class UserService {
 	public Object updateLastLogin(ReqData rData) throws Exception {
 		return dao.update("UserMapper.updateLastLogin", rData);
 	}
-
+	
+	public User getUserInfo(int id) throws Exception {
+		User user =  new User();
+		user.setId(id);
+		return(User) dao.findForObject("UserMapper.getUserInfo2", user);
+	}
+	public Object updateUserInfo(ReqData rData) throws Exception {
+		return dao.update("UserMapper.updateUserInfo", rData);
+	}
 }

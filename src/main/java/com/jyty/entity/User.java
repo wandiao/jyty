@@ -2,6 +2,8 @@ package com.jyty.entity;
 
 import java.util.Date;
 
+import javax.sound.midi.MidiDevice.Info;
+
 public class User {
 	//用户id
 	private int id;	
@@ -27,6 +29,14 @@ public class User {
 	private Date create_time;
 	//更新时间
 	private Date update_time;
+	// 地址
+	private String address;
+	// 个人简历
+	private String info;
+	// 历程
+	private String progress;
+	// 期望与发展
+	private String dream;
 	public int getId() {
 		return id;
 	}
@@ -98,6 +108,30 @@ public class User {
 	}
 	public void setUpdate_time(Date update_time) {
 		this.update_time = update_time;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	public String getProgress() {
+		return progress;
+	}
+	public void setProgress(String progress) {
+		this.progress = progress;
+	}
+	public String getDream() {
+		return dream;
+	}
+	public void setDream(String dream) {
+		this.dream = dream;
 	}
 	
 }

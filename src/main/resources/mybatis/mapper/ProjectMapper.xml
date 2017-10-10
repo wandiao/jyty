@@ -90,8 +90,7 @@
 		<if test="type_id!=null">
 		and type_id = #{type_id}
 		</if>
-		order by create_time desc
-		
+		order by create_time desc		
 	</select>
 	<!-- 获取所有分类 -->
 	<select id="getTypes" resultType="Type">

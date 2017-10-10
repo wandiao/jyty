@@ -24,10 +24,10 @@
 				<div class="r_info">
 					<ul class="r_myinfo">
 						<li class="r_myinfo1">
-							qq：<span>1176033349</span>
+							qq：<span>${user.qq }</span>
 						</li>
 						<li class="r_myinfo1">
-							wchart：<span>1176033349</span>
+							wchart：<span>${user.weixin }</span>
 						</li>
 						<li class="r_myinfo1">
 							phone：<span>1176033349</span>

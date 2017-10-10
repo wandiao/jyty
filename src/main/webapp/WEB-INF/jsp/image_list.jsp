@@ -32,23 +32,16 @@
 							<div class="replace_listtop1">图片作品时间</div>
 							<div class="replace_listtop1">操作</div>
 						</li>
-
-						<li class="replace_listcontent">
-							<div class="replace_listcontent1">app</div>
-							<div class="replace_listcontent1">app</div>
-							<div class="replace_listcontent1">图片作品简介</div>
-							<div class="replace_listcontent1">图片作品项目</div>
-							<div class="replace_listcontent1">图片作品时间</div>
-							<div class="replace_listcontent1"><a href="">修改</a></div>
-						</li>
-						<li class="replace_listcontent">
-							<div class="replace_listcontent1">app</div>
-							<div class="replace_listcontent1">app</div>
-							<div class="replace_listcontent1">图片作品简介</div>
-							<div class="replace_listcontent1">图片作品项目</div>
-							<div class="replace_listcontent1">图片作品时间</div>
-							<div class="replace_listcontent1"><a href="">修改</a></div>
-						</li>
+						<c:forEach items="${images }" var="image">
+							<li class="replace_listcontent">
+								<div class="replace_listcontent1">${image.name }</div>
+								<div class="replace_listcontent1">${image.type_name }</div>
+								<div class="replace_listcontent1">${image.summary }</div>
+								<div class="replace_listcontent1">${image.project_name }</div>
+								<div class="replace_listcontent1">${image.complete_time }</div>
+								<div class="replace_listcontent1"><a href="update/${image.id }">修改</a></div>
+							</li>
+						</c:forEach>
 					</ul>
 				</form>
 				<!--分页器-->

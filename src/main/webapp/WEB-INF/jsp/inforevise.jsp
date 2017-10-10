@@ -19,35 +19,34 @@
 				</ul>
 			</div>
 			<div class="rightc">
-				<form action="" class="biaodan">
+				<form action="revise.do" class="biaodan" method="post">
+					<c:if test="${msg != null}">
+						<h3>${msg}</h3>
+					</c:if>
 					<ul>
 						<li class="replace">
-							<p class="replacename">电话：</p>
-							<input type="text" class="replacecontent">
-						</li>
-						<li class="replace">
 							<p class="replacename">qq：</p>
-							<input type="text" class="replacecontent">
+							<input value="${user.qq }" type="text" name="qq"  class="replacecontent">
 						</li>
 						<li class="replace">
 							<p class="replacename">微信：</p>
-							<input type="num" class="replacecontent">
+							<input value="${user.weixin }" type="text" name="weixin" class="replacecontent">
 						</li>
 						<li class="replace">
 							<p class="replacename">居住地址：</p>
-							<input type="text" class="replacecontent">
+							<input value="${user.address }" type="text" name="address" class="replacecontent">
 						</li>
 						<li class="replace">
 							<p class="replacename">个人简历：</p>
-							<textarea class="replacecontent1"></textarea>
+							<textarea name="info" class="replacecontent1">${user.info }</textarea>
 						</li>
 						<li class="replace">
 							<p class="replacename">历程：</p>
-							<textarea class="replacecontent1"></textarea>
+							<textarea name="progress" class="replacecontent1">${user.progress }</textarea>
 						</li>
 						<li class="replace">
 							<p class="replacename">期望与发展：</p>
-							<textarea class="replacecontent1"></textarea>
+							<textarea name="dream" class="replacecontent1">${user.dream }</textarea>
 						</li>
 					</ul>
 					<input type="submit" value="修改" class="btn addprogress">

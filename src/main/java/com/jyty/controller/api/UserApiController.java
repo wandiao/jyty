@@ -17,8 +17,8 @@ import com.jyty.service.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600,methods={RequestMethod.GET,RequestMethod.POST,RequestMethod.OPTIONS})
 @Controller
-@RequestMapping("/api")
-public class LoginApiController {
+@RequestMapping("/api/user")
+public class UserApiController {
 	private  Logger logger = Logger.getLogger(this.getClass());
 	@Resource(name="userService")
 	private UserService userService;
@@ -39,6 +39,7 @@ public class LoginApiController {
 			User u = userService.getUserByNameAndPwd(username, password);
 			if(u!=null) {
 				session.setAttribute("username", username);
+				session.setAttribute("userid", u.getId());
 				response = response.success(u);
 				
 			}else{
@@ -50,4 +51,15 @@ public class LoginApiController {
 		
 		return response;
 	}
+	
+	@RequestMapping(value="/profile")
+	@ResponseBody
+	public ResponseData getUserInfo(int id) throws Exception {
+		ResponseData response = new ResponseData();
+		User u = userService.getUserInfo(id);
+		if(u != null) {
+			response = response.success(u);
+		}
+		return response;
+	};
 }

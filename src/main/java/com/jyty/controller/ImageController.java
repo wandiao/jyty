@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jyty.entity.BaseType;
+import com.jyty.entity.Image;
 import com.jyty.service.ImageService;
 import com.jyty.util.FtpUtil;
 import com.jyty.util.ReqData;
@@ -53,9 +56,11 @@ public class ImageController {
 		ModelAndView mv = new ModelAndView();
 		String msg = request.getParameter("msg");
 		String pic_url = request.getParameter("pic_url");
+		List<BaseType> types = imageService.getTypes();
 		mv.setViewName("image_add");
 		mv.addObject("msg", msg);
 		mv.addObject("pic_url", pic_url);
+		mv.addObject("types", types);
 		return mv;
 	}
 	
@@ -100,18 +105,21 @@ public class ImageController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		System.out.println("文件长度: " + file.getSize());   
+		/*System.out.println("文件长度: " + file.getSize());   
         System.out.println("文件类型: " + file.getContentType());   
         System.out.println("文件名称: " + file.getName());   
         System.out.println("文件原名: " + file.getOriginalFilename());   
-        System.out.println("========================================");  
+        System.out.println("========================================"); */ 
 		
 		return mv;
 	}
 	@RequestMapping(value="/list")
-	public ModelAndView Imagelist() throws Exception {
+	public ModelAndView Imagelist(HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		ReqData rData = new ReqData(request);
+		List<Object> images = imageService.getImageList(rData);
 		mv.setViewName("image_list");
+		mv.addObject("images", images);
 		return mv;
 	}
 	@RequestMapping(value="/type")

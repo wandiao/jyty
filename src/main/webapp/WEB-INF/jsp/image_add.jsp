@@ -35,8 +35,9 @@
 						<li class="replace">
 							<p class="replacename">图片类别：</p>
 							<select class="replacecontent" name="type_id">
-								<option value="1">电商</option>
-								<option value="2">移动端</option>
+								<c:forEach items="${types }" var="type">
+									<option value="${type.type_id }">${type.type_name}</option>
+								</c:forEach>
 							</select>
 						</li>
 						<li class="replace">

@@ -12,7 +12,7 @@
 		<result column="project_url" property="project_url"/>
 		<result column="summary" property="summary"/>	
 		<result column="read_num" property="read_num"/>	
-		<result column="favorite_num" property="favortie_num"/>	
+		<result column="favorite_num" property="favorite_num"/>	
 		<result column="complete_time" property="update_time"/>
 		<result column="create_time" property="create_time"/>
 		<result column="update_time" property="update_time"/>
@@ -59,6 +59,16 @@
 		#{update_time}
 	</sql>
 	
+	<!-- 得到一条图片详情 -->
+	<select id="getImageItem" parameterType="int"  resultMap="ImageMap">
+		select
+		 <include refid="field"></include>
+		 from  
+		<include refid="tableName"></include>
+		where 1=1
+		and id = #{_parameter}
+	</select>
+	
 	<!-- 新增图片 -->
 	<insert id="addImage" parameterType="ReqData">
 		insert into <include refid="tableName"></include>
@@ -78,6 +88,28 @@
 		and type_id = #{_parameter}
 		</if>
 	</select>
+	
+	<!-- 获取所有分类 -->
+	<select id="getTypes" resultType="Type">
+		select * from <include refid="typeTableName"></include>
+	</select>
+	
+	<!-- 获取图片列表 -->
+	<select id="getImageList" parameterType="ReqData" resultMap="ImageMap">
+		select <include refid="field"></include> from
+		<include refid="tableName"></include>
+		where 1=1 
+		<if test="type_id!=null">
+		and type_id = #{type_id}
+		</if>
+		order by create_time desc		
+	</select>
+	
+	<!-- 增加阅读数 -->
+	<update id="addReadNum" parameterType="int">
+		update <include refid="tableName"></include>
+		set read_num = read_num+1
+	</update>
 	
 	
 	

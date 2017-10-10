@@ -9,6 +9,8 @@ public class Image {
 	private String name;
 	// 分类id
 	private String type_id;
+	// 分类名称
+	private String type_name;
 	// 图片地址
 	private String pic_url;
 	// 项目名称
@@ -44,6 +46,12 @@ public class Image {
 	}
 	public void setType_id(String type_id) {
 		this.type_id = type_id;
+	}
+	public String getType_name() {
+		return type_name;
+	}
+	public void setType_name(String type_name) {
+		this.type_name = type_name;
 	}
 	public String getPic_url() {
 		return pic_url;

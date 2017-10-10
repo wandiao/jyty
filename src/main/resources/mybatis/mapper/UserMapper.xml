@@ -16,6 +16,11 @@
 		<result column="summary" property="summary"/>	
 		<result column="create_time" property="create_time"/>	
 		<result column="update_time" property="update_time"/>
+		<result column="address" property="address"/>
+		<result column="info" property="info"/>
+		<result column="dream" property="dream"/>
+		<result column="progress" property="progress"/>
+		
 	</resultMap>
 	
 	
@@ -38,11 +43,34 @@
 		summary,
 		email,
 		create_time,
-		update_time
+		update_time,
+		address,
+		info,
+		dream,
+		progress
 	</sql>
 	
-	<!-- 判断用户名和密码 -->
-	<select id="getUserInfo" parameterType="User"  resultMap="userMap">
+	<!-- 字段值 -->
+	<sql id="fieldValue">
+		#{id},
+		#{username},
+		#{name},
+		#{qq},
+		#{weixin},
+		#{blog},
+		#{github},
+		#{summary},
+		#{email},
+		#{create_time},
+		#{update_time},
+		#{address},
+		#{info},
+		#{dream},
+		#{progress}
+	</sql>
+	
+	<!-- 验证用户名密码 -->
+	<select id="getUserInfo1" parameterType="User"  resultMap="userMap">
 		select <include refid="Field"></include> from
 		<include refid="tableName"></include>
 		where 1=1
@@ -50,6 +78,14 @@
 		and username = #{username} and password = md5(#{password})
 		</if>
 	</select>
+	
+	<!-- 验证用户名密码 -->
+	<select id="getUserInfo2" parameterType="User"  resultMap="userMap">
+		select <include refid="Field"></include> from
+		<include refid="tableName"></include>
+		where id = #{id}
+	</select>
+	
 	
 	<!-- 检查用户是否存在 -->
 	<select id="userIsExist" parameterType="String" resultType="int">
@@ -66,5 +102,22 @@
 		last_ip=#{last_ip}
 		where user_id = #{user_id}
 	</update>
+	<!-- 修改信息 -->
+	<update id="updateUserInfo" parameterType="ReqData">
+		update <include refid="tableName"></include>
+		<set>
+			qq=#{qq},
+			email=#{email},
+			weixin=#{weixin},
+			blog=#{blog},
+			github=#{github},
+			address=#{address},
+			info=#{info},
+			progress=#{progress},
+			dream=#{dream}
+		</set>
+		where id=#{id}
+	</update>
+	
 	
 </mapper>

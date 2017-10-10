@@ -43,7 +43,7 @@
 			}
 			$.ajax({
 				type:'post',
-				url:"<%=path%>/api/login",
+				url:"<%=path%>/api/user/login",
 				data: {
 					username:username,
 					password:password
