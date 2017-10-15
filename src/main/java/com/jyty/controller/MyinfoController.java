@@ -33,9 +33,11 @@ public class MyinfoController {
 		ModelAndView mv = new ModelAndView();
 		int id = (Integer) session.getAttribute("userid");
 		User u = userService.getUserInfo(id);
+		String error_msg = request.getParameter("error_msg");
 		String msg = request.getParameter("msg");
 		mv.setViewName("inforevise");
 		mv.addObject("user", u);
+		mv.addObject("error_msg", error_msg);
 		mv.addObject("msg", msg);
 		return mv;
 	}

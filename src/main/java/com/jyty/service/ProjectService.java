@@ -71,4 +71,8 @@ public class ProjectService {
 		return  dao.update("ProjectMapper.addReadNum", null);
 	}
 	
+	public Object updateProject(ReqData rData) throws Exception {
+		return dao.update("ProjectMapper.updateObject", rData);
+	}
+	
 }

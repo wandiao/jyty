@@ -54,10 +54,12 @@ public class ImageController {
 	@RequestMapping(value="/add")
 	public ModelAndView addImageView(HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		String error_msg = request.getParameter("error_msg");
 		String msg = request.getParameter("msg");
 		String pic_url = request.getParameter("pic_url");
 		List<BaseType> types = imageService.getTypes();
 		mv.setViewName("image_add");
+		mv.addObject("error_msg", error_msg);
 		mv.addObject("msg", msg);
 		mv.addObject("pic_url", pic_url);
 		mv.addObject("types", types);

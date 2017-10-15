@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -82,13 +83,18 @@ public class ProjectController {
 		ModelAndView mv = new ModelAndView();
 		List<BaseType> types = projectService.getTypes();
 		mv.addObject("types", types);
-		logger.info(types);
 		String error_msg = request.getParameter("error_msg");
-		String mString = request.getParameter("msg");
+		String msg = request.getParameter("msg");
 		mv.setViewName("project_add");
 		mv.addObject("error_msg", error_msg);
+		mv.addObject("msg", msg);
 		return mv;
 	}
+	/**
+	 * 新增项目接口
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/add.do")
 	public ModelAndView addProject(HttpServletRequest request) {
 		ModelAndView mv =  new ModelAndView("redirect:/project/add");
@@ -105,6 +111,52 @@ public class ProjectController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("error_msg", "新增失败");
+			// TODO: handle exception
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/update/{id}")
+	public ModelAndView updatePage(@PathVariable("id") int id, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		try {
+			List<BaseType> types = projectService.getTypes();
+			mv.addObject("types", types);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Object project = projectService.getProjectById(id);
+			mv.addObject("project", project);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String error_msg = request.getParameter("error_msg");
+		String msg = request.getParameter("msg");
+		mv.setViewName("project_update");
+		mv.addObject("error_msg", error_msg);
+		mv.addObject("msg", msg);
+		return mv;
+	}
+	
+	@RequestMapping(value="update/{id}.do")
+	public ModelAndView updateAction(@PathVariable("id") int id, HttpServletRequest request)  throws Exception {
+		ModelAndView mv =  new ModelAndView("redirect:/project/update/" + id);	
+		ReqData rData = new ReqData(request);
+		Date date = new Date();
+		rData.put("update_time", date);
+		rData.put("id", id);
+		try {
+			String result = projectService.updateProject(rData).toString();
+			if (Integer.parseInt(result) == 1) {
+				mv.addObject("msg", "修改成功");
+			}
+			logger.info("result:" + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("error_msg", "修改失败");
 			// TODO: handle exception
 		}
 		return mv;

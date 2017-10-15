@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ArticleMapper">
+
+	<resultMap type="Article" id="articleMap">
+		<id column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="type_id" property="type_id"/>	
+		<result column="body" property="body"/>
+		<result column="refer_url" property="refer_url"/>
+		<result column="favorite_num" property="favorite_num"/>	
+		<result column="read_num" property="read_num"/>
+		<result column="create_time" property="create_time"/>	
+		<result column="update_time" property="update_time"/>
+		<association property="type_name" column="type_id"  select="getTypeName">
+		</association>			
+	</resultMap>
+	
+	
+	<!-- 表名 -->
+	<sql id="tableName">
+		jyty_article
+	</sql>
+	<sql id="typeTableName">
+		jyty_article_type
+	</sql>
+	<!-- 字段 -->
+	<sql id="field">
+		id,
+		title,
+		type_id,
+		body,
+		refer_url,
+		read_num,
+		favorite_num,
+		create_time,
+		update_time
+	</sql>
+	<!-- 字段值 -->
+	<sql id="fieldValue">
+		#{id},
+		#{title},
+		#{type_id},
+		#{body},
+		#{refer_url},
+		0,
+		0,
+		#{create_time},
+		#{update_time}
+	</sql>
+	
+	<!-- 得到一条项目详情 -->
+	<select id="getArticleItem" parameterType="int"  resultMap="articleMap">
+		select
+		 <include refid="field"></include>
+		 from  
+		<include refid="tableName"></include>
+		where 1=1
+		and id = #{_parameter}
+	</select>
+	
+	<!-- 得到分类名称 -->
+	<select id="getTypeName" parameterType="String" resultType="String">
+		select type_name  from
+		<include refid="typeTableName"></include>
+		where 1=1
+		<if test="_parameter!=null">
+		and type_id = #{_parameter}
+		</if>
+	</select>
+	
+	<!-- 获取项目列表 -->
+	<select id="getArticleList" parameterType="ReqData" resultMap="articleMap">
+		select <include refid="field"></include> from
+		<include refid="tableName"></include>
+		where 1=1 
+		<if test="type_id!=null">
+		and type_id = #{type_id}
+		</if>
+		order by create_time desc		
+	</select>
+	<!-- 获取所有分类 -->
+	<select id="getTypes" resultType="Type">
+		select * from <include refid="typeTableName"></include>
+	</select>
+	
+	<!-- 新增项目 -->
+	<insert id="addArticle" parameterType="ReqData">
+		insert into <include refid="tableName"></include>
+		(
+		<include refid="field"></include>
+		) values (
+		<include refid="fieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 增加阅读数 -->
+	<update id="addReadNum" parameterType="int">
+		update <include refid="tableName"></include>
+		set read_num = read_num+1
+	</update>
+	
+	
+</mapper>

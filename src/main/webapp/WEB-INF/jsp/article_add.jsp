@@ -21,19 +21,28 @@
 				</ul>
 			</div>
 			<div class="rightc">
-				<form action="" class="biaodan">
+				<form action="add.do" class="biaodan" method="post">
+					<input type="hidden" name="body">
 					<ul>
 						<li class="replace">
 							<p class="replacename">文章标题：</p>
-							<input type="text" class="replacecontent">
+							<input type="text" class="replacecontent" name="title">
 						</li>
 						<li class="replace">
 							<p class="replacename">文章类别：</p>
-							<input type="text" class="replacecontent">
+							<select name="type_id" class="replacecontent">
+								<c:forEach items="${types }" var="type">
+									<option value="${type.type_id }">${type.type_name}</option>
+								</c:forEach>
+							</select>
+						</li>
+						<li class="replace">
+							<p class="replacename">参考地址：</p>
+							<input type="text" class="replacecontent" name="refer_url">
 						</li>
 						
 						<li class="replace">
-						<p class="replacename" style="float: left;">文章类别：</p>
+						<p class="replacename" style="float: left;">文章内容：</p>
     				<script id="editor" type="text/plain" style="width:700px;height:200px;float: right;margin-right: 20px;"></script>
 <div id="btns">
 
@@ -65,11 +74,7 @@
         alert(UE.getEditor('editor').getAllHtml())
     }
     function getContent() {
-        var arr = [];
-        arr.push("使用editor.getContent()方法可以获得编辑器的内容");
-        arr.push("内容为：");
-        arr.push(UE.getEditor('editor').getContent());
-        alert(arr.join("\n"));
+        return UE.getEditor('editor').getContent();
     }
     function getPlainTxt() {
         var arr = [];
@@ -155,11 +160,19 @@
 
 						</li>
 					</ul>
-					<input type="submit" value="上传" class="btn addprogress">
+					<button type="button" class="btn addprogress">上传</button>
 				</form>
 			</div>
 		</div>
 	</div>
-
+	<script>
+		var btn = $('.addprogress');
+		var body = $('input[name=body]');
+		var form = $('.biaodan');
+		btn.on('click', function() {
+			body.val(getContent());
+			form.submit();
+		})
+	</script>
 </body>
 </html>

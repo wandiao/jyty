@@ -42,6 +42,14 @@
 							</select>
 						</li>
 						<li class="replace">
+							<p class="replacename">链接地址：</p>
+							<input type="text" class="replacecontent" name="url">
+						</li>
+						<li class="replace">
+							<p class="replacename">公司：</p>
+							<input type="text" class="replacecontent" name="company">
+						</li>
+						<li class="replace">
 							<p class="replacename">担任职位：</p>
 							<input type="text" class="replacecontent" name="position">
 						</li>

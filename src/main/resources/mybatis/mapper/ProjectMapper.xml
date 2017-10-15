@@ -113,5 +113,22 @@
 		set read_num = read_num+1
 	</update>
 	
+	<!-- 修改项目 -->
+	<update id="updateObject" parameterType="ReqData">
+		update <include refid="tableName"></include>
+		<set>
+			title = #{title},
+			type_id = #{type_id},
+			url = #{url},
+			position = #{position},
+			summary = #{summary},
+			company = #{company},
+			project_start_time = #{project_start_time},
+			project_end_time = #{project_end_time},
+			update_time = #{update_time}
+		</set>
+		where id = #{id}
+	</update>
+	
 	
 </mapper>

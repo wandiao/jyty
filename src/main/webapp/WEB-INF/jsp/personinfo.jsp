@@ -33,17 +33,17 @@
 							phone：<span>1176033349</span>
 						</li>
 						<li class="r_myinfo1">
-							info：<span>idsjfoi将诶偶然偶就看到撒可富  输入法国家哦i阿萨德吧</span>
+							info：<span>${user.info }</span>
 						</li>
 						<li class="r_myinfo1">
-							progress：<span>idsjfoi将诶偶然偶就看到撒可富  输入法国家哦i阿萨德吧</span>
+							progress：<span>${user.progress }</span>
 						</li>
 						<li class="r_myinfo1">
-							dream：<span>idsjfoi将诶偶然偶就看到撒可富  输入法国家哦i阿萨德吧</span>
+							dream：<span>${user.dream }</span>
 						</li>
 					</ul>
 				</div>
-				<div class="r_xiugai"><a href="">修改跟人信息</a></div>
+				<div class="r_xiugai"><a href="revise">修改跟人信息</a></div>
 			</div>
 		</div>
 	</div>

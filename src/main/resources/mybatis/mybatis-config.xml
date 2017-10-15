@@ -14,6 +14,7 @@
 		<typeAlias type="com.jyty.entity.User" alias="User"/>
 		<typeAlias type="com.jyty.entity.BaseType" alias="Type"/>
 		<typeAlias type="com.jyty.entity.Image" alias="Image"/> 
+		<typeAlias type="com.jyty.entity.Article" alias="Article"/>
 		
 		
 		
