@@ -13,7 +13,7 @@
 		<result column="summary" property="summary"/>	
 		<result column="read_num" property="read_num"/>	
 		<result column="favorite_num" property="favorite_num"/>	
-		<result column="complete_time" property="update_time"/>
+		<result column="complete_time" property="complete_time"/>
 		<result column="create_time" property="create_time"/>
 		<result column="update_time" property="update_time"/>
 		<association property="type_name" column="type_id"  select="getTypeName">
@@ -110,6 +110,51 @@
 		update <include refid="tableName"></include>
 		set read_num = read_num+1
 	</update>
+	
+	<!-- 修改图片 -->
+	<update id="updateImage" parameterType="ReqData">
+		update <include refid="tableName"></include>
+		<set>
+			name = #{name},
+			type_id = #{type_id},
+			pic_url = #{pic_url},
+			project_name = #{project_name},
+			project_url = #{project_url},
+			summary = #{summary},
+			complete_time = #{complete_time},
+			update_time = #{update_time}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 删除项目 -->
+	<delete id="deleteImage" parameterType="ReqData">
+		delete from <include refid="tableName"></include>
+		where id=#{id}
+	</delete>
+	
+	<!-- 新增分类 -->
+	<insert id="addType" parameterType="ReqData">
+		insert into <include refid="typeTableName"></include>
+		(type_name, pid, create_time) values (#{type_name}, #{pid}, #{create_time})
+	</insert>
+	
+	<!-- 修改分类 -->
+	<update id="updateType" parameterType="ReqData">
+		update <include refid="typeTableName"></include>
+		<set>
+			type_name = #{type_name},
+			pid = #{pid}
+			update_time = #{update_time}
+		</set>
+		where type_id = #{id}
+	</update>
+	
+	<!-- 删除分类 -->
+	<delete id="deleteType" parameterType="ReqData">
+		delete from <include refid="typeTableName"></include>
+		where type_id=#{id}
+	</delete>
 	
 	
 	

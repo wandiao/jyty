@@ -40,4 +40,22 @@ public class ImageService {
 	public Object addReadNum() throws Exception {
 		return  dao.update("ImageMapper.addReadNum", null);
 	}
+	public Object updateImage(ReqData rData) throws Exception {
+		return dao.update("ImageMapper.updateImage", rData);
+	}
+	
+	public Object deleteImage(ReqData rData) throws Exception {
+		return dao.delete("ImageMapper.deleteImage", rData);
+	}
+	public Object addType(ReqData rData) throws Exception {
+		return dao.delete("ImageMapper.addType", rData);
+	}
+	
+	public Object updateType(ReqData rData) throws Exception {
+		return dao.delete("ImageMapper.updateType", rData);
+	}
+	
+	public Object deleteType(ReqData rData) throws Exception {
+		return dao.delete("ImageMapper.deleteType", rData);
+	}
 }

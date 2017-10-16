@@ -95,6 +95,12 @@
 		)
 	</insert>
 	
+	<!-- 新增分类 -->
+	<insert id="addType" parameterType="ReqData">
+		insert into <include refid="typeTableName"></include>
+		(type_name, pid, create_time) values (#{type_name}, #{pid}, #{create_time})
+	</insert>
+	
 	<!-- 增加阅读数 -->
 	<update id="addReadNum" parameterType="int">
 		update <include refid="tableName"></include>

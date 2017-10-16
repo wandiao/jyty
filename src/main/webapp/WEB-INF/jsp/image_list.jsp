@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +39,8 @@
 								<div class="replace_listcontent1">${image.type_name }</div>
 								<div class="replace_listcontent1">${image.summary }</div>
 								<div class="replace_listcontent1">${image.project_name }</div>
-								<div class="replace_listcontent1">${image.complete_time }</div>
-								<div class="replace_listcontent1"><a href="update/${image.id }">修改</a></div>
+								<div class="replace_listcontent1"><fmt:formatDate value="${image.complete_time }" pattern="yyyy-MM-dd"/></div>
+								<div class="replace_listcontent1"><a href="update/${image.id }">修改</a>/<a href="javascript:;" class="del-btn" data-id="${image.id }">删除</a></div>
 							</li>
 						</c:forEach>
 					</ul>
@@ -50,6 +51,21 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	var delBtn = $(".del-btn");
+	delBtn.click(function() {
+		var id = $(this).attr("data-id");
+		$.ajax({
+			type:'post',
+			url:'delete/'+ id + '.do',
+			success:function(res) {
+				console.log(res)
+				alert("删除成功");
+				window.location.reload();
+			}
+		})
+	})
+	</script>
 
 </body>
 </html>

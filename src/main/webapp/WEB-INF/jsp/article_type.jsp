@@ -26,19 +26,11 @@
 							<p>新增分类</p>
 						<input type="text" value="新增类别">
 						<input type="button" value="确定">
-						<select>
-						<option value="app">个人</option>
-						<option value="电商">关于</option>
-					</select>
 					</div>
 
 					<ul>
 						<li class="replace_listtop">
-							<div class="replace_listtop1">图片作品名称</div>
-							<div class="replace_listtop1">图片作品类别</div>
-							<div class="replace_listtop1">图片作品简介</div>
-							<div class="replace_listtop1">图片作品项目</div>
-							<div class="replace_listtop1">图片作品时间</div>
+							<div class="replace_listtop1">分类名称</div>
 							<div class="replace_listtop1">操作</div>
 						</li>
 

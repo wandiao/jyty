@@ -72,7 +72,22 @@ public class ProjectService {
 	}
 	
 	public Object updateProject(ReqData rData) throws Exception {
-		return dao.update("ProjectMapper.updateObject", rData);
+		return dao.update("ProjectMapper.updateProject", rData);
+	}
+	
+	public Object deleteProject(ReqData rData) throws Exception {
+		return dao.delete("ProjectMapper.deleteProject", rData);
+	}
+	public Object addType(ReqData rData) throws Exception {
+		return dao.delete("ProjectMapper.addType", rData);
+	}
+	
+	public Object updateType(ReqData rData) throws Exception {
+		return dao.delete("ProjectMapper.updateType", rData);
+	}
+	
+	public Object deleteType(ReqData rData) throws Exception {
+		return dao.delete("ProjectMapper.deleteType", rData);
 	}
 	
 }

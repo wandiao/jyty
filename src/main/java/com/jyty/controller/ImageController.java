@@ -15,12 +15,15 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jyty.entity.BaseType;
 import com.jyty.entity.Image;
+import com.jyty.entity.ResponseData;
 import com.jyty.service.ImageService;
 import com.jyty.util.FtpUtil;
 import com.jyty.util.ReqData;
@@ -124,10 +127,152 @@ public class ImageController {
 		mv.addObject("images", images);
 		return mv;
 	}
-	@RequestMapping(value="/type")
-	public ModelAndView Imagetype() throws Exception {
+	@RequestMapping(value="update/{id}")
+	public ModelAndView updatePage(@PathVariable("id") int id, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("image_type");
+		try {
+			List<BaseType> types = imageService.getTypes();
+			mv.addObject("types", types);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Object image = imageService.getImageById(id);
+			mv.addObject("image", image);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String error_msg = request.getParameter("error_msg");
+		String msg = request.getParameter("msg");
+		mv.setViewName("image_update");
+		mv.addObject("error_msg", error_msg);
+		mv.addObject("msg", msg);
 		return mv;
+	}
+	@RequestMapping(value="update/{id}.do")
+	public ModelAndView updateAction(MultipartFile file, @PathVariable("id") int id, HttpServletRequest request)  throws Exception {
+		ModelAndView mv =  new ModelAndView("redirect:/image/update/" + id);	
+		ReqData rData = new ReqData(request);
+		Date date = new Date();
+		rData.put("update_time", date);
+		rData.put("id", id);
+		if (!file.isEmpty()) {
+			System.out.println("++++++++++++++++++");
+			String newName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+			logger.info(newName);
+			//上传的路径  
+	        String imagePath = new SimpleDateFormat("/yyyy-MM-dd").format(new Date());
+	      //端口号  
+	        int port = Integer.parseInt(FTP_PORT); 
+	        
+	        try {
+				boolean upload_result = FtpUtil.uploadFile(FTP_ADDRESS, port,  
+					        FTP_USERNAME, FTP_PASSWORD, FTP_BASEPATH, imagePath,  
+					        newName, file.getInputStream());
+				if(!upload_result) {
+					mv.addObject("err_msg", "上传失败");
+					return mv;
+				}
+				String pic_url = IMAGE_BASE_URL + imagePath + "/" + newName;
+				rData.put("pic_url", pic_url);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				mv.addObject("error_msg", "上传异常");
+				e.printStackTrace();
+			}
+		}
+		try {
+			String result = imageService.updateImage(rData).toString();
+			if (Integer.parseInt(result) == 1) {
+				mv.addObject("msg", "修改成功");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("error_msg", "修改失败");
+			// TODO: handle exception
+		}
+		return mv;
+	}
+	@RequestMapping(value="/delete/{id}.do")
+	@ResponseBody
+	public ResponseData deleteProject(@PathVariable("id") int id) {
+		ResponseData responseData = new ResponseData();
+		ReqData rData = new ReqData();
+		rData.put("id", id);
+		try {
+			Object result = imageService.deleteImage(rData);
+			responseData.success(result);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			responseData.failure("删除失败");
+		}
+		return responseData;
+	}
+
+
+	@RequestMapping(value="/type")
+	public ModelAndView typeproject() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<BaseType> types = imageService.getTypes();
+		mv.addObject("types", types);
+		mv.setViewName("project_type");
+		return mv;
+	}
+	@RequestMapping(value="/type/add.do")
+	public ModelAndView addType(HttpServletRequest request) throws Exception {
+		ModelAndView mv =  new ModelAndView("redirect:/image/type");
+		ReqData rData = new ReqData(request);
+		Date date = new Date();
+		rData.put("create_time", date);
+		try {
+			Object result = imageService.addType(rData);
+			if (Integer.parseInt(result.toString()) == 1) {
+				mv.addObject("msg", "新增成功");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			mv.addObject("error_msg", "新增失败");
+		}
+		return mv;
+	}
+	@RequestMapping(value="/type/update/{id}.do")
+	public ModelAndView updateType(@PathVariable("id") int id, HttpServletRequest request) throws Exception {
+		ModelAndView mv =  new ModelAndView("redirect:/image/type");
+		ReqData rData = new ReqData(request);
+		Date date = new Date();
+		rData.put("update_time", date);
+		rData.put("id", id);
+		try {
+			Object result = imageService.updateType(rData);
+			if (Integer.parseInt(result.toString()) == 1) {
+				mv.addObject("msg", "更新成功");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			mv.addObject("error_msg", "更新失败");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/type/delete/{id}.do")
+	@ResponseBody
+	public ResponseData deleteType(@PathVariable("id") int id) {
+		ResponseData responseData = new ResponseData();
+		ReqData rData = new ReqData();
+		rData.put("id", id);
+		try {
+			Object result = imageService.deleteType(rData);
+			responseData.success(result);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			responseData.failure("删除失败");
+		}
+		return responseData;
 	}
 }

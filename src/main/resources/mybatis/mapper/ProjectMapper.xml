@@ -114,7 +114,7 @@
 	</update>
 	
 	<!-- 修改项目 -->
-	<update id="updateObject" parameterType="ReqData">
+	<update id="updateProject" parameterType="ReqData">
 		update <include refid="tableName"></include>
 		<set>
 			title = #{title},
@@ -129,6 +129,36 @@
 		</set>
 		where id = #{id}
 	</update>
+	
+	<!-- 删除项目 -->
+	<delete id="deleteProject" parameterType="ReqData">
+		delete from <include refid="tableName"></include>
+		where id=#{id}
+	</delete>
+	
+	<!-- 新增分类 -->
+	<insert id="addType" parameterType="ReqData">
+		insert into <include refid="typeTableName"></include>
+		(type_name, pid, create_time) values (#{type_name}, #{pid}, #{create_time})
+	</insert>
+	
+	<!-- 修改分类 -->
+	<update id="updateType" parameterType="ReqData">
+		update <include refid="typeTableName"></include>
+		<set>
+			type_name = #{type_name},
+			pid = #{pid}
+			update_time = #{update_time}
+		</set>
+		where type_id = #{id}
+	</update>
+	
+	<!-- 删除分类 -->
+	<delete id="deleteType" parameterType="ReqData">
+		delete from <include refid="typeTableName"></include>
+		where type_id=#{id}
+	</delete>
+	
 	
 	
 </mapper>

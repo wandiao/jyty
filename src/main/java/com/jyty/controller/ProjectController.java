@@ -161,13 +161,84 @@ public class ProjectController {
 		}
 		return mv;
 	}
+	@RequestMapping(value="/delete/{id}.do")
+	@ResponseBody
+	public ResponseData deleteProject(@PathVariable("id") int id) {
+		ResponseData responseData = new ResponseData();
+		ReqData rData = new ReqData();
+		rData.put("id", id);
+		try {
+			Object result = projectService.deleteProject(rData);
+			responseData.success(result);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			responseData.failure("删除失败");
+		}
+		return responseData;
+	}
 
 
 	@RequestMapping(value="/type")
 	public ModelAndView typeproject() throws Exception {
 		ModelAndView mv = new ModelAndView();
+		List<BaseType> types = projectService.getTypes();
+		mv.addObject("types", types);
 		mv.setViewName("project_type");
 		return mv;
 	}
-
+	@RequestMapping(value="/type/add.do")
+	public ModelAndView addType(HttpServletRequest request) throws Exception {
+		ModelAndView mv =  new ModelAndView("redirect:/project/type");
+		ReqData rData = new ReqData(request);
+		Date date = new Date();
+		rData.put("create_time", date);
+		try {
+			Object result = projectService.addType(rData);
+			if (Integer.parseInt(result.toString()) == 1) {
+				mv.addObject("msg", "新增成功");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			mv.addObject("error_msg", "新增失败");
+		}
+		return mv;
+	}
+	@RequestMapping(value="/type/update/{id}.do")
+	public ModelAndView updateType(@PathVariable("id") int id, HttpServletRequest request) throws Exception {
+		ModelAndView mv =  new ModelAndView("redirect:/project/type");
+		ReqData rData = new ReqData(request);
+		Date date = new Date();
+		rData.put("update_time", date);
+		rData.put("id", id);
+		try {
+			Object result = projectService.updateType(rData);
+			if (Integer.parseInt(result.toString()) == 1) {
+				mv.addObject("msg", "更新成功");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			mv.addObject("error_msg", "更新失败");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/type/delete/{id}.do")
+	@ResponseBody
+	public ResponseData deleteType(@PathVariable("id") int id) {
+		ResponseData responseData = new ResponseData();
+		ReqData rData = new ReqData();
+		rData.put("id", id);
+		try {
+			Object result = projectService.deleteType(rData);
+			responseData.success(result);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			responseData.failure("删除失败");
+		}
+		return responseData;
+	}
 }

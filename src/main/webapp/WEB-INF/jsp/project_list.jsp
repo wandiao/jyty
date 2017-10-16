@@ -40,7 +40,7 @@
 								<div class="replace_listcontent1">${item.summary }</div>
 								<div class="replace_listcontent1">${item.position }</div>
 								<div class="replace_listcontent1"><fmt:formatDate value="${item.project_start_time }" pattern="yyyy-MM-dd"/></div>
-								<div class="replace_listcontent1"><a href="update/${item.id }">修改</a>/<a>删除</a></div>
+								<div class="replace_listcontent1"><a href="update/${item.id }">修改</a>/<a class="del-btn" href="javascript:;" data-id="${item.id }">删除</a></div>
 							</li>
 						</c:forEach>
 					</ul>
@@ -53,6 +53,20 @@
 					current:"${current}",
 					showData:"${pageSize}"
 				});
+				var delBtn = $(".del-btn");
+				delBtn.click(function() {
+					var id = $(this).attr("data-id");
+					$.ajax({
+						type:'post',
+						url:'delete/'+ id + '.do',
+						success:function(res) {
+							console.log(res)
+							alert("删除成功");
+							window.location.reload();
+						}
+					})
+				})
+				
 				</script>
 				
 			</div>
