@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-09-26T07:51:39.415Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="XHylh2M2N-WqX5tj7EE4" version="15.3.0" type="github">
+<mxfile host="app.diagrams.net" modified="2021-09-26T09:05:49.836Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="zhcqmbwQ3tqKiROIvEZf" version="15.3.0" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1678" dy="840" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -87,7 +87,7 @@
         <mxCell id="966gIlQP6vz7zwQvXy11-16" value="熔断容灾策略" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=middle;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="110" y="320" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="966gIlQP6vz7zwQvXy11-17" value="熔断容灾策略" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=middle;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="966gIlQP6vz7zwQvXy11-17" value="日志统一收集" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=middle;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="250" y="320" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="966gIlQP6vz7zwQvXy11-23" value="" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
